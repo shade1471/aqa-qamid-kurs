@@ -30,7 +30,7 @@ public class DataHelper {
         }
 
         public static OrderInfo getNotValidInfo() {
-            return new OrderInfo("1234 5678 0987 6543", getCurrentMonth(), generateYear(), generateOwner("en"), generateCvc());
+            return new OrderInfo("1234 4321 5678 8765", getCurrentMonth(), generateYear(), generateOwner("en"), generateCvc());
         }
 
         public static String getCurrentMonth() {

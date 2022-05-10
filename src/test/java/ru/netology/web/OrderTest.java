@@ -37,4 +37,25 @@ public class OrderTest {
         orderPage.notValidOrderByDebtCard(infoNotValid);
     }
 
+    @Test
+    void shouldCheckNumberFieldWith12Digits() {
+        orderPage.numberFieldCheck("1111 2222 3333", infoApproved);
+    }
+
+    @Test
+    void shouldCheckNumberFieldWith15Digits() {
+        orderPage.numberFieldCheck("1111 2222 3333 444", infoApproved);
+    }
+
+    @Test
+    void shouldCheckNumberFieldWith1Digit() {
+        orderPage.numberFieldCheck("1", infoApproved);
+    }
+
+    @Test
+    void shouldCheckNumberFieldEmpty() {
+        orderPage.numberFieldCheck("", infoApproved);
+    }
+
+
 }
