@@ -24,84 +24,16 @@ public class OrderTest {
 
     @Test
     void shouldSendOrderByDebtCardApproved() {
-        orderPage.validOrderByApprovedDebtCard(infoApproved);
+        orderPage.orderByApproved(infoApproved);
     }
 
     @Test
     void shouldSendOrderByDebtCardDeclined() {
-        orderPage.validOrderByDeclinedDebtCard(infoDeclined);
+        orderPage.orderByDeclined(infoDeclined);
     }
 
     @Test
     void shouldSendOrderByDebtCardNotValid() {
-        orderPage.notValidOrderByDebtCard(infoNotValid);
+        orderPage.orderByNotValid(infoNotValid);
     }
-
-    @Test
-    void shouldCheckNumberFieldWith12Digits() {
-        orderPage.numberFieldCheck("1111 2222 3333", infoApproved);
-    }
-
-    @Test
-    void shouldCheckNumberFieldWith15Digits() {
-        orderPage.numberFieldCheck("1111 2222 3333 444", infoApproved);
-    }
-
-    @Test
-    void shouldCheckNumberFieldWith1Digit() {
-        orderPage.numberFieldCheck("1", infoApproved);
-    }
-
-    @Test
-    void shouldCheckNumberFieldEmpty() {
-        orderPage.numberFieldCheck("", infoApproved);
-    }
-
-    @Test
-    void shouldCheckMonthFieldEmpty() {
-        orderPage.monthFieldCheck("", infoApproved);
-    }
-
-    @Test
-    void shouldCheckMonthFieldWith1Digit() {
-        orderPage.monthFieldCheck("5", infoApproved);
-    }
-
-    @Test
-    void shouldCheckMonthFieldLessThanBoundaryValues() {
-        orderPage.monthFieldCheck("00", infoApproved);
-    }
-
-    @Test
-    void shouldCheckMonthFieldMoreThanBoundaryValues() {
-        orderPage.monthFieldCheck("13", infoApproved);
-    }
-
-    @Test
-    void shouldCheckYearFieldEmpty() {
-        orderPage.yearFieldCheck("", infoApproved);
-    }
-
-    @Test
-    void shouldCheckYearFieldWith1Digit() {
-        orderPage.yearFieldCheck("2", infoApproved);
-    }
-
-    @Test
-    void shouldCheckYearFieldValueLessThanCurrentYear() {
-        orderPage.yearFieldCheck(getLastYear(1), infoApproved);
-    }
-
-    @Test
-    void shouldCheckYearFieldValueMoreThanFiveYears() {
-        orderPage.yearFieldCheck(getFutureYear(6), infoApproved);
-    }
-
-    @Test
-    void shouldCheckOwnerFieldEmpty() {
-        orderPage.ownerFieldCheck("", infoApproved);
-    }
-
-
-
 }

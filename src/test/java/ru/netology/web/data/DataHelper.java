@@ -22,15 +22,18 @@ public class DataHelper {
         private String cvc;
 
         public static OrderInfo getValidInfoApproved() {
-            return new OrderInfo("1111 2222 3333 4444", getCurrentMonth(), generateYear(), generateOwner("en"), generateCvc());
+            return new OrderInfo("1111 2222 3333 4444", getCurrentMonth(), generateYear(),
+                    generateOwner("en"), generateCvc());
         }
 
         public static OrderInfo getValidInfoDeclined() {
-            return new OrderInfo("5555 6666 7777 8888", getCurrentMonth(), generateYear(), generateOwner("en"), generateCvc());
+            return new OrderInfo("5555 6666 7777 8888", getCurrentMonth(), generateYear(),
+                    generateOwner("en"), generateCvc());
         }
 
         public static OrderInfo getNotValidInfo() {
-            return new OrderInfo("1234 4321 5678 8765", getCurrentMonth(), generateYear(), generateOwner("en"), generateCvc());
+            return new OrderInfo("1234 4321 5678 8765", getCurrentMonth(), generateYear(),
+                    generateOwner("en"), generateCvc());
         }
 
         public static String getCurrentMonth() {
@@ -38,12 +41,12 @@ public class DataHelper {
             return currentMonth;
         }
 
-        public static String getLastYear(int shift) {
-            int currentYear = LocalDate.now().minusYears(shift).getYear();
-            return Integer.toString(currentYear).substring(2);
+        public static String getManualMonth(int shift) {
+            String currentMonth = LocalDate.now().plusMonths(shift).format(DateTimeFormatter.ofPattern("MM"));
+            return currentMonth;
         }
 
-        public static String getFutureYear(int shift) {
+        public static String getManualYear(int shift) {
             int currentYear = LocalDate.now().plusYears(shift).getYear();
             return Integer.toString(currentYear).substring(2);
         }
@@ -67,6 +70,4 @@ public class DataHelper {
             return Integer.toString(cvc);
         }
     }
-
-
 }

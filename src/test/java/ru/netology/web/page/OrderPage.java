@@ -37,7 +37,9 @@ public class OrderPage {
     private SelenideElement statusError = $(".notification_status_error .notification__title");
     private SelenideElement wrongFormat = $(".input_invalid .input__inner .input__sub");
 
-    public void dataInput(DataHelper.OrderInfo info) {
+    public void dataInputDebt(DataHelper.OrderInfo info) {
+        buyButton.click();
+        headingBuy.shouldBe(visible);
         numberCard.setValue(info.getNumber());
         monthField.setValue(info.getMonth());
         yearField.setValue(info.getYear());
@@ -46,24 +48,18 @@ public class OrderPage {
         proceedButton.click();
     }
 
-    public void validOrderByApprovedDebtCard(DataHelper.OrderInfo info) {
-        buyButton.click();
-        headingBuy.shouldBe(visible);
-        dataInput(info);
+    public void orderByApproved(DataHelper.OrderInfo info) {
+        dataInputDebt(info);
         statusOk.shouldHave(text("Успешно"), Duration.ofSeconds(15));
     }
 
-    public void validOrderByDeclinedDebtCard(DataHelper.OrderInfo info) {
-        buyButton.click();
-        headingBuy.shouldBe(visible);
-        dataInput(info);
+    public void orderByDeclined(DataHelper.OrderInfo info) {
+        dataInputDebt(info);
         statusError.shouldHave(text("Ошибка"), Duration.ofSeconds(15));
     }
 
-    public void notValidOrderByDebtCard(DataHelper.OrderInfo info) {
-        buyButton.click();
-        headingBuy.shouldBe(visible);
-        dataInput(info);
+    public void orderByNotValid(DataHelper.OrderInfo info) {
+        dataInputDebt(info);
         statusError.shouldHave(text("Ошибка"), Duration.ofSeconds(15));
     }
 
@@ -72,7 +68,7 @@ public class OrderPage {
         field.sendKeys(Keys.BACK_SPACE);
     }
 
-    public void numberFieldCheck(String number, DataHelper.OrderInfo info) {
+    public void checkNumberField(String number, DataHelper.OrderInfo info) {
         buyButton.click();
         numberCard.setValue(number);
         monthField.setValue(info.getMonth());
@@ -83,7 +79,7 @@ public class OrderPage {
         wrongFormat.shouldHave(text("Неверный формат"));
     }
 
-    public void monthFieldCheck(String month, DataHelper.OrderInfo info) {
+    public void checkMonthField(String month, DataHelper.OrderInfo info) {
         buyButton.click();
         numberCard.setValue(info.getNumber());
         monthField.setValue(month);
@@ -91,12 +87,11 @@ public class OrderPage {
         ownerField.setValue(info.getOwner());
         codeField.setValue(info.getCvc());
         proceedButton.click();
-        //wrongFormat.shouldBe(Condition.visible);
         wrongFormat.shouldHave(or("formatOrValidity", text("Неверный формат"),
                 text("Неверно указан срок действия карты")));
     }
 
-    public void yearFieldCheck(String year, DataHelper.OrderInfo info) {
+    public void checkYearField(String year, DataHelper.OrderInfo info) {
         buyButton.click();
         numberCard.setValue(info.getNumber());
         monthField.setValue(info.getMonth());
@@ -104,11 +99,10 @@ public class OrderPage {
         ownerField.setValue(info.getOwner());
         codeField.setValue(info.getCvc());
         proceedButton.click();
-        //wrongFormat.shouldBe(Condition.visible);
         wrongFormat.shouldHave(or("formatOrValidity", text("Неверный формат"), ownText("срок действия карты")));
     }
 
-    public void ownerFieldCheck(String owner, DataHelper.OrderInfo info) {
+    public void checkOwnerField(String owner, DataHelper.OrderInfo info) {
         buyButton.click();
         numberCard.setValue(info.getNumber());
         monthField.setValue(info.getMonth());
@@ -117,5 +111,16 @@ public class OrderPage {
         codeField.setValue(info.getCvc());
         proceedButton.click();
         wrongFormat.shouldHave(text("Поле обязательно для заполнения"));
+    }
+
+    public void checkCvcField(String cvc, DataHelper.OrderInfo info) {
+        buyButton.click();
+        numberCard.setValue(info.getNumber());
+        monthField.setValue(info.getMonth());
+        yearField.setValue(info.getYear());
+        ownerField.setValue(info.getOwner());
+        codeField.setValue(cvc);
+        proceedButton.click();
+        wrongFormat.shouldHave(text("Неверный формат"));
     }
 }
