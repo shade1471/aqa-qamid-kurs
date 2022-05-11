@@ -57,5 +57,51 @@ public class OrderTest {
         orderPage.numberFieldCheck("", infoApproved);
     }
 
+    @Test
+    void shouldCheckMonthFieldEmpty() {
+        orderPage.monthFieldCheck("", infoApproved);
+    }
+
+    @Test
+    void shouldCheckMonthFieldWith1Digit() {
+        orderPage.monthFieldCheck("5", infoApproved);
+    }
+
+    @Test
+    void shouldCheckMonthFieldLessThanBoundaryValues() {
+        orderPage.monthFieldCheck("00", infoApproved);
+    }
+
+    @Test
+    void shouldCheckMonthFieldMoreThanBoundaryValues() {
+        orderPage.monthFieldCheck("13", infoApproved);
+    }
+
+    @Test
+    void shouldCheckYearFieldEmpty() {
+        orderPage.yearFieldCheck("", infoApproved);
+    }
+
+    @Test
+    void shouldCheckYearFieldWith1Digit() {
+        orderPage.yearFieldCheck("2", infoApproved);
+    }
+
+    @Test
+    void shouldCheckYearFieldValueLessThanCurrentYear() {
+        orderPage.yearFieldCheck(getLastYear(1), infoApproved);
+    }
+
+    @Test
+    void shouldCheckYearFieldValueMoreThanFiveYears() {
+        orderPage.yearFieldCheck(getFutureYear(6), infoApproved);
+    }
+
+    @Test
+    void shouldCheckOwnerFieldEmpty() {
+        orderPage.ownerFieldCheck("", infoApproved);
+    }
+
+
 
 }

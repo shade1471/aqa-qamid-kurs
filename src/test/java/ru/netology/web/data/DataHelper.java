@@ -38,6 +38,16 @@ public class DataHelper {
             return currentMonth;
         }
 
+        public static String getLastYear(int shift) {
+            int currentYear = LocalDate.now().minusYears(shift).getYear();
+            return Integer.toString(currentYear).substring(2);
+        }
+
+        public static String getFutureYear(int shift) {
+            int currentYear = LocalDate.now().plusYears(shift).getYear();
+            return Integer.toString(currentYear).substring(2);
+        }
+
         public static String generateYear() {
             int[] years = new int[6];
             for (int i = 0; i < 6; i++) {
