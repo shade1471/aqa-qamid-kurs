@@ -1,7 +1,9 @@
 package ru.netology.web.page;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import lombok.val;
 import org.openqa.selenium.Keys;
 import ru.netology.web.data.DataHelper;
 
@@ -36,6 +38,12 @@ public class OrderPage {
     private SelenideElement statusOk = $(".notification_status_ok .notification__title");
     private SelenideElement statusError = $(".notification_status_error .notification__title");
     private SelenideElement wrongFormat = $(".input_invalid .input__inner .input__sub");
+
+    private ElementsCollection description = $$(".list__item");
+    private final String amountStart = "Всего ";
+    private final String amountFinish = " руб.!";
+
+
 
     public void dataInputDebt(DataHelper.OrderInfo info) {
         buyButton.click();
@@ -122,5 +130,15 @@ public class OrderPage {
         codeField.setValue(cvc);
         proceedButton.click();
         wrongFormat.shouldHave(text("Неверный формат"));
+    }
+    public int getTravelPrice() {
+        val text = description.findBy(ownText(amountFinish)).text();
+        return extractAmount(text);
+    }
+    private int extractAmount(String text) {
+        val start = text.indexOf(amountStart);
+        val finish = text.indexOf(amountFinish);
+        val value = text.substring(start + amountStart.length(), finish).replace(" ","");
+        return Integer.parseInt(value);
     }
 }

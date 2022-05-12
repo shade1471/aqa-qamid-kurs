@@ -6,8 +6,10 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import ru.netology.web.data.DataHelper;
 import ru.netology.web.page.OrderPage;
+import ru.netology.web.utils.SQLRequest;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.netology.web.data.DataHelper.OrderInfo.*;
 
 public class OrderTest {
@@ -42,7 +44,7 @@ public class OrderTest {
     }
 
     @Nested
-    public class WebForm{
+    public class WebForm {
         @BeforeEach
         void setup() {
             open("http://localhost:8080");
@@ -130,4 +132,36 @@ public class OrderTest {
         }
     }
 
+    @Nested
+    public class SQL {
+
+        @BeforeEach
+        void setup() {
+            open("http://localhost:8080");
+            //Configuration.holdBrowserOpen = true;
+        }
+
+        @Test
+        void shouldCheckAmount() {
+            orderPage.orderByApproved(infoApproved);
+            int actual = SQLRequest.getAmount();
+            int expected = orderPage.getTravelPrice();
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        void shouldCheckStatusIfCardApproved() {
+            orderPage.orderByApproved(infoApproved);
+            String actual = SQLRequest.getStatus();
+            assertEquals("APPROVED", actual);
+        }
+
+        @Test
+        void shouldCheckStatusIfCardDeclined() {
+            orderPage.orderByApproved(infoDeclined);
+            String actual = SQLRequest.getStatus();
+            assertEquals("DECLINED", actual);
+        }
+
+    }
 }
