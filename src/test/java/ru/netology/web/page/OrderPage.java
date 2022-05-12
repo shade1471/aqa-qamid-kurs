@@ -3,6 +3,7 @@ package ru.netology.web.page;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import lombok.val;
 import org.openqa.selenium.Keys;
 import ru.netology.web.data.DataHelper;
@@ -44,7 +45,7 @@ public class OrderPage {
     private final String amountFinish = " руб.!";
 
 
-
+    @Step("Ввод данных в форму при оплате по дебетовой карте")
     public void dataInputDebt(DataHelper.OrderInfo info) {
         buyButton.click();
         headingBuy.shouldBe(visible);
@@ -56,16 +57,19 @@ public class OrderPage {
         proceedButton.click();
     }
 
+    @Step("Отправка формы по одобренной дебетовой карте")
     public void orderByApproved(DataHelper.OrderInfo info) {
         dataInputDebt(info);
         statusOk.shouldHave(text("Успешно"), Duration.ofSeconds(15));
     }
 
+    @Step("Отправка формы по отклоненной дебетовой карте")
     public void orderByDeclined(DataHelper.OrderInfo info) {
         dataInputDebt(info);
         statusError.shouldHave(text("Ошибка"), Duration.ofSeconds(15));
     }
 
+    @Step("Отправка формы по не валидной дебетовой карте")
     public void orderByNotValid(DataHelper.OrderInfo info) {
         dataInputDebt(info);
         statusError.shouldHave(text("Ошибка"), Duration.ofSeconds(15));
@@ -76,6 +80,7 @@ public class OrderPage {
         field.sendKeys(Keys.BACK_SPACE);
     }
 
+    @Step("Ввод данных в форму и проверка поля 'Номер карты' со значением {number}")
     public void checkNumberField(String number, DataHelper.OrderInfo info) {
         buyButton.click();
         numberCard.setValue(number);
@@ -87,6 +92,7 @@ public class OrderPage {
         wrongFormat.shouldHave(text("Неверный формат"));
     }
 
+    @Step("Ввод данных в форму и проверка поля 'Месяц карты' со значением {month}")
     public void checkMonthField(String month, DataHelper.OrderInfo info) {
         buyButton.click();
         numberCard.setValue(info.getNumber());
@@ -99,6 +105,7 @@ public class OrderPage {
                 text("Неверно указан срок действия карты")));
     }
 
+    @Step("Ввод данных в форму и проверка поля 'Год карты' со значением {year}")
     public void checkYearField(String year, DataHelper.OrderInfo info) {
         buyButton.click();
         numberCard.setValue(info.getNumber());
@@ -110,6 +117,7 @@ public class OrderPage {
         wrongFormat.shouldHave(or("formatOrValidity", text("Неверный формат"), ownText("срок действия карты")));
     }
 
+    @Step("Ввод данных в форму и проверка поля 'Владелец карты' со значением {owner}")
     public void checkOwnerField(String owner, DataHelper.OrderInfo info) {
         buyButton.click();
         numberCard.setValue(info.getNumber());
@@ -121,6 +129,7 @@ public class OrderPage {
         wrongFormat.shouldHave(text("Поле обязательно для заполнения"));
     }
 
+    @Step("Вводы данных в форму и проверка поля CVC/CVV со значением {cvc}")
     public void checkCvcField(String cvc, DataHelper.OrderInfo info) {
         buyButton.click();
         numberCard.setValue(info.getNumber());
@@ -131,6 +140,7 @@ public class OrderPage {
         proceedButton.click();
         wrongFormat.shouldHave(text("Неверный формат"));
     }
+    @Step("Получение стоимости путешествия со страницы заказа")
     public int getTravelPrice() {
         val text = description.findBy(ownText(amountFinish)).text();
         return extractAmount(text);

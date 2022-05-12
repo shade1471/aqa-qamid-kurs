@@ -1,5 +1,6 @@
 package ru.netology.web.utils;
 
+import io.qameta.allure.Step;
 import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -17,6 +18,7 @@ public class SQLRequest {
         return conn;
     }
 
+    @Step("Запрос стоимости тура по последней транзакции")
     @SneakyThrows
     public static int getAmount() {
         var amountSQL = "SELECT amount FROM payment_entity\n" +
@@ -26,6 +28,7 @@ public class SQLRequest {
         return Integer.parseInt(amount);
     }
 
+    @Step("Запрос статуса последней транзакции")
     @SneakyThrows
     public static String getStatus() {
         var statusSQL = "SELECT status FROM payment_entity\n" +
