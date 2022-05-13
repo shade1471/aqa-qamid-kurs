@@ -29,6 +29,8 @@ dependencies {
     testImplementation 'com.codeborne:selenide:5.19.0'
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
     testImplementation 'io.qameta.allure:allure-selenide:2.16.1'
+    testImplementation 'io.rest-assured:rest-assured:4.3.0'
+    testImplementation 'com.google.code.gson:gson:2.8.6'
 }
 
 test {

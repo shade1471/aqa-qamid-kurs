@@ -7,6 +7,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import ru.netology.web.data.DataHelper;
 import ru.netology.web.page.OrderPage;
+import ru.netology.web.utils.ApiRequest;
 import ru.netology.web.utils.SQLRequest;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -40,7 +41,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Оформление заказа по одобренной карте")
         @Severity(value = SeverityLevel.CRITICAL)
         @Test
@@ -49,7 +50,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Оформление заказа по отклоненной карте")
         @Severity(value = SeverityLevel.CRITICAL)
         @Test
@@ -58,7 +59,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Оформление заказа по не валидной карте")
         @Severity(value = SeverityLevel.CRITICAL)
         @Test
@@ -75,8 +76,9 @@ public class OrderTest {
             open("http://localhost:8080");
             //Configuration.holdBrowserOpen = true;
         }
+
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, номер карты: 12-ти значное число")
         @Test
         void shouldCheckNumberFieldWith12Digits() {
@@ -84,7 +86,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, номер карты: 15-ти значное число")
         @Test
         void shouldCheckNumberFieldWith15Digits() {
@@ -92,7 +94,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, номер карты: Однозначное число")
         @Test
         void shouldCheckNumberFieldWith1Digit() {
@@ -100,7 +102,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, номер карты: пустое поле")
         @Test
         void shouldCheckNumberFieldEmpty() {
@@ -108,7 +110,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, месяц карты: Пустое поле")
         @Test
         void shouldCheckMonthFieldEmpty() {
@@ -116,7 +118,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, месяц карты: Однозначное число")
         @Test
         void shouldCheckMonthFieldWith1Digit() {
@@ -124,7 +126,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, месяц карты: Граничное значение '00' ")
         @Test
         void shouldCheckMonthFieldLessThanBoundaryValues() {
@@ -132,7 +134,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, месяц карты: Граничное значение '13'")
         @Test
         void shouldCheckMonthFieldMoreThanBoundaryValues() {
@@ -140,7 +142,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, месяц карты: Не валидное число '24'")
         @Test
         void shouldCheckMonthFieldNotValidValues() {
@@ -148,7 +150,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, год карты: Пустое поле")
         @Test
         void shouldCheckYearFieldEmpty() {
@@ -156,7 +158,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, год карты: Однозначное число")
         @Test
         void shouldCheckYearFieldWith1Digit() {
@@ -164,7 +166,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, год карты: Прошедший год")
         @Test
         void shouldCheckYearFieldValueLessThanCurrentYear() {
@@ -172,7 +174,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, год карты: Срок действия карты больше 5 лет")
         @Test
         void shouldCheckYearFieldValueMoreThanFiveYears() {
@@ -180,7 +182,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, владелец карты: Пустое поле")
         @Test
         void shouldCheckOwnerFieldEmpty() {
@@ -188,7 +190,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, CVC/CVV: Пустое поле")
         @Test
         void shouldCheckCvcFieldEmpty() {
@@ -196,7 +198,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, CVC/CVV: Однозначное число")
         @Test
         void shouldCheckCvcFieldWith1Digit() {
@@ -214,7 +216,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка записи в СУБД стоимости путешествия при оплате одобренной картой")
         @Severity(value = SeverityLevel.CRITICAL)
         @Test
@@ -226,7 +228,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка записи в СУБД статуса операции при оплате одобренной картой")
         @Test
         void shouldCheckStatusIfCardApproved() {
@@ -236,7 +238,7 @@ public class OrderTest {
         }
 
         @Epic(value = "Приложение для заказа путешествия")
-        @Feature(value= "Функционал для заказа путешествия с выбором оплаты")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка записи в СУБД статуса операции при оплате отклоненной картой")
         @Test
         void shouldCheckStatusIfCardDeclined() {
@@ -246,4 +248,36 @@ public class OrderTest {
         }
 
     }
+
+    @Nested
+    public class Api {
+
+        @Epic(value = "Приложение для заказа путешествия")
+        @Feature(value = "API запрос")
+        @Story("Проверка статуса операции по API при оплате одобренной картой")
+        @Test
+        void shouldCheckStatusByApiWithApprovedCard() {
+            String actual = ApiRequest.getStatus(infoApproved);
+            assertEquals("APPROVED", actual);
+        }
+
+        @Epic(value = "Приложение для заказа путешествия")
+        @Feature(value = "API запрос")
+        @Story("Проверка статуса операции по API при оплате отклоненной картой")
+        @Test
+        void shouldCheckStatusByApiWithDeclinedCard() {
+            String actual = ApiRequest.getStatus(infoDeclined);
+            assertEquals("DECLINED", actual);
+        }
+
+        @Epic(value = "Приложение для заказа путешествия")
+        @Feature(value = "API запрос")
+        @Story("Проверка статуса операции по API при оплате невалидной картой")
+        @Test
+        void shouldCheckStatusByApiWithNotValidCard() {
+            ApiRequest.getStatusNotValid(infoNotValid);
+        }
+
+    }
 }
+
