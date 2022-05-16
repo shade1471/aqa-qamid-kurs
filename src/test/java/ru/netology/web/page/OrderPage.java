@@ -44,7 +44,6 @@ public class OrderPage {
     private final String amountStart = "Всего ";
     private final String amountFinish = " руб.!";
 
-
     @Step("Ввод данных в форму при оплате по дебетовой карте")
     public void dataInputDebt(DataHelper.OrderInfo info) {
         buyButton.click();
@@ -126,7 +125,7 @@ public class OrderPage {
         ownerField.setValue(owner);
         codeField.setValue(info.getCvc());
         proceedButton.click();
-        wrongFormat.shouldHave(text("Поле обязательно для заполнения"));
+        wrongFormat.shouldHave(or("formatOrValid", text("Поле обязательно для заполнения"), text("Неверный формат")));
     }
 
     @Step("Вводы данных в форму и проверка поля CVC/CVV со значением {cvc}")
@@ -140,15 +139,17 @@ public class OrderPage {
         proceedButton.click();
         wrongFormat.shouldHave(text("Неверный формат"));
     }
+
     @Step("Получение стоимости путешествия со страницы заказа")
     public int getTravelPrice() {
         val text = description.findBy(ownText(amountFinish)).text();
         return extractAmount(text);
     }
+
     private int extractAmount(String text) {
         val start = text.indexOf(amountStart);
         val finish = text.indexOf(amountFinish);
-        val value = text.substring(start + amountStart.length(), finish).replace(" ","");
+        val value = text.substring(start + amountStart.length(), finish).replace(" ", "");
         return Integer.parseInt(value);
     }
 }

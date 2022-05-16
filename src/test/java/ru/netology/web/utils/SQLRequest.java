@@ -20,21 +20,15 @@ public class SQLRequest {
 
     @Step("Запрос стоимости тура по последней транзакции")
     @SneakyThrows
-    public static int getAmount() {
-        var amountSQL = "SELECT amount FROM payment_entity\n" +
-                "ORDER BY created DESC \n" +
-                "LIMIT 1;";
-        var amount = runner.query(connection(), amountSQL, new ScalarHandler<>()).toString();
+    public static int getAmount(String query) {
+        var amount = runner.query(connection(), query, new ScalarHandler<>()).toString();
         return Integer.parseInt(amount);
     }
 
     @Step("Запрос статуса последней транзакции")
     @SneakyThrows
-    public static String getStatus() {
-        var statusSQL = "SELECT status FROM payment_entity\n" +
-                "ORDER BY created DESC \n" +
-                "LIMIT 1;";
-        var status = runner.query(connection(), statusSQL, new ScalarHandler<>()).toString();
+    public static String getStatus(String query) {
+        var status = runner.query(connection(), query, new ScalarHandler<>()).toString();
         return status;
     }
 

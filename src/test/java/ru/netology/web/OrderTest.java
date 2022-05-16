@@ -1,6 +1,5 @@
 package ru.netology.web;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.*;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -20,6 +19,14 @@ public class OrderTest {
 
     private DataHelper.OrderInfo infoNotValid = getNotValidInfo();
     private OrderPage orderPage = new OrderPage();
+
+    public static String amountSQL = "SELECT amount FROM payment_entity\n" +
+            "ORDER BY created DESC \n" +
+            "LIMIT 1;";
+
+    public static String statusSQL = "SELECT status FROM payment_entity\n" +
+            "ORDER BY created DESC \n" +
+            "LIMIT 1;";
 
     @BeforeAll
     static void setUpAll() {
@@ -191,6 +198,14 @@ public class OrderTest {
 
         @Epic(value = "Приложение для заказа путешествия")
         @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
+        @Story("Проверка поля веб формы, владелец карты: Кириллические символы")
+        @Test
+        void shouldCheckOwnerFieldWithCyrillicSymbols() {
+            orderPage.checkOwnerField("Иван Иванов", infoApproved);
+        }
+
+        @Epic(value = "Приложение для заказа путешествия")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
         @Story("Проверка поля веб формы, CVC/CVV: Пустое поле")
         @Test
         void shouldCheckCvcFieldEmpty() {
@@ -203,6 +218,14 @@ public class OrderTest {
         @Test
         void shouldCheckCvcFieldWith1Digit() {
             orderPage.checkCvcField("1", infoApproved);
+        }
+
+        @Epic(value = "Приложение для заказа путешествия")
+        @Feature(value = "Функционал для заказа путешествия с выбором оплаты")
+        @Story("Проверка поля веб формы, CVC/CVV: Нижнее граничное значение")
+        @Test
+        void shouldCheckCvcFieldLowBoundary() {
+            orderPage.checkCvcField("000", infoApproved);
         }
     }
 
@@ -222,7 +245,7 @@ public class OrderTest {
         @Test
         void shouldCheckAmount() {
             orderPage.orderByApproved(infoApproved);
-            int actual = SQLRequest.getAmount();
+            int actual = SQLRequest.getAmount(amountSQL);
             int expected = orderPage.getTravelPrice();
             assertEquals(expected, actual);
         }
@@ -233,7 +256,7 @@ public class OrderTest {
         @Test
         void shouldCheckStatusIfCardApproved() {
             orderPage.orderByApproved(infoApproved);
-            String actual = SQLRequest.getStatus();
+            String actual = SQLRequest.getStatus(statusSQL);
             assertEquals("APPROVED", actual);
         }
 
@@ -243,7 +266,7 @@ public class OrderTest {
         @Test
         void shouldCheckStatusIfCardDeclined() {
             orderPage.orderByApproved(infoDeclined);
-            String actual = SQLRequest.getStatus();
+            String actual = SQLRequest.getStatus(statusSQL);
             assertEquals("DECLINED", actual);
         }
 
