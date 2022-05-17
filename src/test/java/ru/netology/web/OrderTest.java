@@ -20,14 +20,6 @@ public class OrderTest {
     private DataHelper.OrderInfo infoNotValid = getNotValidInfo();
     private OrderPage orderPage = new OrderPage();
 
-    public static String amountSQL = "SELECT amount FROM payment_entity\n" +
-            "ORDER BY created DESC \n" +
-            "LIMIT 1;";
-
-    public static String statusSQL = "SELECT status FROM payment_entity\n" +
-            "ORDER BY created DESC \n" +
-            "LIMIT 1;";
-
     @BeforeAll
     static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -245,7 +237,7 @@ public class OrderTest {
         @Test
         void shouldCheckAmount() {
             orderPage.orderByApproved(infoApproved);
-            int actual = SQLRequest.getAmount(amountSQL);
+            int actual = SQLRequest.getAmount();
             int expected = orderPage.getTravelPrice();
             assertEquals(expected, actual);
         }
@@ -256,7 +248,7 @@ public class OrderTest {
         @Test
         void shouldCheckStatusIfCardApproved() {
             orderPage.orderByApproved(infoApproved);
-            String actual = SQLRequest.getStatus(statusSQL);
+            String actual = SQLRequest.getStatus();
             assertEquals("APPROVED", actual);
         }
 
@@ -266,7 +258,7 @@ public class OrderTest {
         @Test
         void shouldCheckStatusIfCardDeclined() {
             orderPage.orderByApproved(infoDeclined);
-            String actual = SQLRequest.getStatus(statusSQL);
+            String actual = SQLRequest.getStatus();
             assertEquals("DECLINED", actual);
         }
 
