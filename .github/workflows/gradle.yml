@@ -34,21 +34,13 @@ jobs:
     - name: Docker up
       run: docker-compose up -d && sleep 10
                
-    - name: forward
-      run: cd artifacts/ 
-      
-    - name: App start
-      run: java -jar aqa-shop.jar &
-         
+    - name: Start app
+      run: cd artifacts/; java -jar aqa-shop.jar &; cd ..
+              
     - name: Sleep
       run: sleep 20
       
-    - name: back
-      run: cd ..   
-      
-    - name: Acces for gradlew
-      run: chmod +x gradlew
+    - name: Acces for gradlew and Execute
+      run: chmod +x gradlew; ./gradlew test -Dselenide.headless=true --info
     
-    - name: Execute Gradle test
-      run: ./gradlew test -Dselenide.headless=true --info
     
