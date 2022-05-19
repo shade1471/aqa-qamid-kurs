@@ -39,7 +39,7 @@ jobs:
            
     - name: App start
       run: cd artifacts/
-       java -jar ./artifacts/aqa-shop.jar &
+       java -jar aqa-shop.jar
        cd ..
       
     - name: Sleep
