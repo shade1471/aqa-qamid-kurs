@@ -34,6 +34,9 @@ jobs:
     - name: Docker up
       run: docker-compose up -d
       
+    - name: App acces
+      run: chmod +x ./artifacts/aqa-shop.jar
+      
     - name: App start
       run: ./artifacts/aqa-shop.jar &
       
