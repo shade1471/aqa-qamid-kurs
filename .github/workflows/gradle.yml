@@ -38,7 +38,7 @@ jobs:
       run: chmod +x ./artifacts/aqa-shop.jar
       
     - name: App start
-      run: ./artifacts/aqa-shop.jar &
+      run: java -jar ./artifacts/aqa-shop.jar &
       
     - name: Acces for gradlew
       run: chmod +x gradlew
