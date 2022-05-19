@@ -34,11 +34,14 @@ jobs:
     - name: Docker up
       run: docker-compose up -d
       
-    - name: App acces
-      run: chmod +x ./artifacts/aqa-shop.jar
-      
+    - name: Sleep
+      run: sleep 10
+           
     - name: App start
       run: java -jar ./artifacts/aqa-shop.jar &
+      
+    - name: Sleep
+      run: sleep 10
       
     - name: Acces for gradlew
       run: chmod +x gradlew
