@@ -35,7 +35,7 @@ jobs:
       run: docker-compose up -d
                
     - name: App start
-      run: cd artifacts/ && java -jar aqa-shop.jar & 
+      run: cd artifacts/ && java -jar aqa-shop.jar 
       
     - name: Sleep
       run: cd .. && sleep 10
