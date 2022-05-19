@@ -35,7 +35,10 @@ jobs:
       run: docker-compose up -d
       
     - name: App start
-      run: ./artifacts/app-ibank-build-for-testers.jar &
+      run: ./artifacts/aqa-shop.jar &
+      
+    - name: Acces for gradlew
+      run: chmod +x gradlew
     
     - name: Execute Gradle test
       run: ./gradlew test -Dselenide.headless=true --info
