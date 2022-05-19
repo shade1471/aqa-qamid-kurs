@@ -35,10 +35,10 @@ jobs:
       run: docker-compose up -d
                
     - name: App start
-      run: cd artifacts/ && java -jar aqa-shop.jar & && cd ..
+      run: cd artifacts/ && java -jar aqa-shop.jar & 
       
     - name: Sleep
-      run: sleep 10
+      run: cd .. && sleep 10
       
     - name: Acces for gradlew
       run: chmod +x gradlew
