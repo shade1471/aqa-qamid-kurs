@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+
+  db:
+    image: postgres:12
+
+    ports:
+      - '5432:5432'
+
+    restart: always
+    environment:
+      POSTGRES_USER: shade1471
+      POSTGRES_PASSWORD: shade1471
+      POSTGRES_DB: app
+

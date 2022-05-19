@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class SQLRequest {
 
@@ -21,8 +22,14 @@ public class SQLRequest {
 
     @SneakyThrows
     public static Connection connection() {
-        var conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/app", "shade1471", "shade1471");
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/app", "shade1471", "shade1471");
+        } catch (SQLException e) {
+            conn = DriverManager.getConnection(
+                    "jdbc:postgresql://localhost:5432/app", "shade1471", "shade1471");
+        }
         return conn;
     }
 
