@@ -38,7 +38,9 @@ jobs:
       run: sleep 10
            
     - name: App start
-      run: java -jar ./artifacts/aqa-shop.jar &
+      run: cd artifacts/
+       java -jar ./artifacts/aqa-shop.jar &
+       cd ..
       
     - name: Sleep
       run: sleep 10
