@@ -35,10 +35,10 @@ jobs:
       run: docker-compose up -d && sleep 10
                
     - name: Start app
-      run: cd artifacts/; java -jar aqa-shop.jar &; cd ..
+      run: cd artifacts/; java -jar aqa-shop.jar
               
     - name: Sleep
-      run: sleep 20
+      run: sleep 20; cd ..
       
     - name: Acces for gradlew and Execute
       run: chmod +x gradlew; ./gradlew test -Dselenide.headless=true --info
