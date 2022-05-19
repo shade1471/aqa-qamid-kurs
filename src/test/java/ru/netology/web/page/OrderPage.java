@@ -59,19 +59,19 @@ public class OrderPage {
     @Step("Отправка формы по одобренной дебетовой карте")
     public void orderByApproved(DataHelper.OrderInfo info) {
         dataInputDebt(info);
-        statusOk.shouldHave(text("Успешно"), Duration.ofSeconds(15));
+        statusOk.shouldHave(text("Успешно"), Duration.ofSeconds(20));
     }
 
     @Step("Отправка формы по отклоненной дебетовой карте")
     public void orderByDeclined(DataHelper.OrderInfo info) {
         dataInputDebt(info);
-        statusError.shouldHave(text("Ошибка"), Duration.ofSeconds(15));
+        statusError.shouldHave(text("Ошибка"), Duration.ofSeconds(20));
     }
 
     @Step("Отправка формы по не валидной дебетовой карте")
     public void orderByNotValid(DataHelper.OrderInfo info) {
         dataInputDebt(info);
-        statusError.shouldHave(text("Ошибка"), Duration.ofSeconds(15));
+        statusError.shouldHave(text("Ошибка"), Duration.ofSeconds(20));
     }
 
     public void clearField(SelenideElement field) {
