@@ -11,6 +11,10 @@ import java.sql.SQLException;
 
 public class SQLRequest {
 
+    public static String url = System.getProperty("db.url");
+    public static String user = System.getProperty("db.user");
+    public static String pass = System.getProperty("db.password");
+
     public static String amountSQL = "SELECT amount FROM payment_entity\n" +
             "ORDER BY created DESC \n" +
             "LIMIT 1;";
@@ -24,11 +28,9 @@ public class SQLRequest {
     public static Connection connection() {
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/app", "shade1471", "shade1471");
+            conn = DriverManager.getConnection(url, user, pass);
         } catch (SQLException e) {
-            conn = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/app", "shade1471", "shade1471");
+            conn = DriverManager.getConnection(System.getProperty("db.urlpost"), user, pass);
         }
         return conn;
     }

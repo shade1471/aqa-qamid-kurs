@@ -13,4 +13,3 @@ services:
       POSTGRES_USER: shade1471
       POSTGRES_PASSWORD: shade1471
       POSTGRES_DB: app
-
