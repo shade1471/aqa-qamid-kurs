@@ -1,6 +1,8 @@
 **Github Actions:**  
 [![AQA-qamid-kurs](https://github.com/shade1471/aqa-qamid-kurs/actions/workflows/gradle.yml/badge.svg)](https://github.com/shade1471/aqa-qamid-kurs/actions/workflows/gradle.yml)
 
+[Описание задания](https://github.com/shade1471/aqa-qamid-kurs/blob/master/Work's%20Description.md)
+
 # Порядок действий для запуска автотестов:
 
 **1. Приложение для заказа тура использует подключение к СУБД для сохранения данных по операциям. Для этого нужно развернуть образ СУБД локально на ПК, где будет производиться запуск тестов, используя инструмент Docker.**
